@@ -1,0 +1,67 @@
+{
+  "00340434161094000001": [
+    {"timestamp": "2026-09-30T16:05:00", "location": "Hamburg, Seller Warehouse", "status": "label_created", "note": "Shipping label created"},
+    {"timestamp": "2026-10-01T11:30:00", "location": "DHL Paketzentrum Hamburg", "status": "picked_up", "note": null},
+    {"timestamp": "2026-10-02T03:45:00", "location": "DHL Paketzentrum Hamburg", "status": "in_transit", "note": "Departed facility"},
+    {"timestamp": "2026-10-03T05:20:00", "location": "DHL Paketzentrum Börnicke (Berlin)", "status": "arrived_at_facility", "note": "Sorting for regional delivery"}
+  ],
+
+  "01505000000002": [
+    {"timestamp": "2026-09-29T18:10:00", "location": "Munich, Seller Warehouse", "status": "label_created", "note": null},
+    {"timestamp": "2026-09-30T14:00:00", "location": "DPD Depot Aschheim (Munich)", "status": "picked_up", "note": null},
+    {"timestamp": "2026-10-01T02:30:00", "location": "DPD Hub Hannover", "status": "in_transit", "note": null},
+    {"timestamp": "2026-10-02T21:15:00", "location": "DPD Depot Berlin-Mariendorf", "status": "arrived_at_facility", "note": null},
+    {"timestamp": "2026-10-03T08:12:00", "location": "Berlin-Friedrichshain, Boxhagener Str.", "status": "out_for_delivery", "note": "Estimated delivery window 13:00–14:00"}
+  ],
+
+  "00340434161094000003": [
+    {"timestamp": "2026-09-24T12:00:00", "location": "Leipzig, Seller Warehouse", "status": "label_created", "note": null},
+    {"timestamp": "2026-09-24T17:40:00", "location": "DHL Paketzentrum Radefeld (Leipzig)", "status": "picked_up", "note": null},
+    {"timestamp": "2026-09-25T04:10:00", "location": "DHL Paketzentrum Börnicke (Berlin)", "status": "arrived_at_facility", "note": null},
+    {"timestamp": "2026-09-26T08:30:00", "location": "Berlin-Kreuzberg, Oranienstraße", "status": "out_for_delivery", "note": null},
+    {"timestamp": "2026-09-26T11:52:00", "location": "Berlin-Kreuzberg, Oranienstraße 25", "status": "delivered", "note": "Handed to recipient"}
+  ],
+
+  "00340434161094000004": [
+    {"timestamp": "2026-09-25T15:20:00", "location": "Dortmund, Seller Warehouse", "status": "label_created", "note": null},
+    {"timestamp": "2026-09-26T10:05:00", "location": "DHL Paketzentrum Dortmund", "status": "picked_up", "note": null},
+    {"timestamp": "2026-09-27T23:50:00", "location": "DHL Paketzentrum Dortmund", "status": "in_transit", "note": "Departed facility"},
+    {"timestamp": "2026-09-29T06:40:00", "location": "DHL Paketzentrum Radefeld (Leipzig)", "status": "arrived_at_facility", "note": "Bulky item — manual sorting required"}
+  ],
+
+  "01505000000005": [
+    {"timestamp": "2026-09-23T09:30:00", "location": "Cologne, Seller Warehouse", "status": "label_created", "note": "Shipment data transmitted to DPD — parcel not yet handed over"}
+  ],
+
+  "01505000000006": [
+    {"timestamp": "2026-09-22T20:00:00", "location": "Frankfurt, Seller Warehouse", "status": "label_created", "note": null},
+    {"timestamp": "2026-09-24T13:15:00", "location": "DPD Depot Frankfurt", "status": "picked_up", "note": null},
+    {"timestamp": "2026-09-25T01:40:00", "location": "DPD Hub Hannover", "status": "in_transit", "note": null},
+    {"timestamp": "2026-09-29T19:30:00", "location": "DPD Depot Berlin-Mariendorf", "status": "arrived_at_facility", "note": null},
+    {"timestamp": "2026-09-30T07:55:00", "location": "Berlin-Neukölln, Weserstraße", "status": "out_for_delivery", "note": null},
+    {"timestamp": "2026-09-30T14:20:00", "location": "Berlin-Neukölln, Weserstraße 112", "status": "delivery_attempted", "note": "Recipient not at home — notification card left"},
+    {"timestamp": "2026-09-30T19:05:00", "location": "DPD Depot Berlin-Mariendorf", "status": "at_depot", "note": "Held at depot. No redelivery scheduled — customer action required. Parcel returned to sender after 7 days."}
+  ],
+
+  "00340434161094000007": [
+    {"timestamp": "2026-09-29T10:45:00", "location": "Bremen, Seller Warehouse", "status": "label_created", "note": null},
+    {"timestamp": "2026-09-29T18:20:00", "location": "DHL Paketzentrum Bremen", "status": "picked_up", "note": null},
+    {"timestamp": "2026-10-01T04:35:00", "location": "DHL Paketzentrum Börnicke (Berlin)", "status": "arrived_at_facility", "note": null},
+    {"timestamp": "2026-10-02T09:10:00", "location": "Berlin-Prenzlauer Berg, Kastanienallee", "status": "out_for_delivery", "note": null},
+    {"timestamp": "2026-10-02T13:47:00", "location": "Berlin-Prenzlauer Berg, Kastanienallee 77", "status": "delivered", "note": "Left at front door"}
+  ],
+
+  "00340434161094000008": [
+    {"timestamp": "2026-09-28T14:25:00", "location": "Berlin-Tempelhof, Seller Warehouse", "status": "label_created", "note": null},
+    {"timestamp": "2026-09-30T10:00:00", "location": "DHL Paketzentrum Rüdersdorf (Berlin)", "status": "picked_up", "note": null},
+    {"timestamp": "2026-10-01T22:30:00", "location": "DHL Paketzentrum Rüdersdorf (Berlin)", "status": "in_transit", "note": null},
+    {"timestamp": "2026-10-02T22:10:00", "location": "DHL Zustellbasis Berlin-Charlottenburg", "status": "arrived_at_facility", "note": "Scheduled for delivery 2026-10-03"}
+  ],
+
+  "01505000000009": [
+    {"timestamp": "2026-09-28T11:15:00", "location": "Stuttgart, Seller Warehouse", "status": "label_created", "note": null},
+    {"timestamp": "2026-09-29T15:30:00", "location": "DPD Depot Stuttgart", "status": "picked_up", "note": null},
+    {"timestamp": "2026-10-01T03:20:00", "location": "DPD Hub Hannover", "status": "arrived_at_facility", "note": null},
+    {"timestamp": "2026-10-02T23:40:00", "location": "DPD Hub Hannover", "status": "in_transit", "note": "Departed facility — en route to Berlin"}
+  ]
+}

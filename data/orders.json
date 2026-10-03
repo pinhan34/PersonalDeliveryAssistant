@@ -1,0 +1,83 @@
+[
+  {
+    "order_id": "ORDER-001",
+    "items": ["Sony WH-1000XM5 Headphones"],
+    "order_date": "2026-09-30",
+    "expected_date": "2026-10-06",
+    "carrier": "DHL",
+    "tracking_number": "00340434161094000001",
+    "status": "in_transit"
+  },
+  {
+    "order_id": "ORDER-002",
+    "items": ["Bialetti Moka Express 6-Cup", "Lavazza Espresso Beans 1kg"],
+    "order_date": "2026-09-29",
+    "expected_date": "2026-10-03",
+    "carrier": "DPD",
+    "tracking_number": "01505000000002",
+    "status": "in_transit"
+  },
+  {
+    "order_id": "ORDER-003",
+    "items": ["Kindle Paperwhite"],
+    "order_date": "2026-09-24",
+    "expected_date": "2026-09-27",
+    "carrier": "DHL",
+    "tracking_number": "00340434161094000003",
+    "status": "delivered"
+  },
+  {
+    "order_id": "ORDER-004",
+    "items": ["IKEA MARKUS Office Chair"],
+    "order_date": "2026-09-25",
+    "expected_date": "2026-10-01",
+    "carrier": "DHL",
+    "tracking_number": "00340434161094000004",
+    "status": "in_transit"
+  },
+  {
+    "order_id": "ORDER-005",
+    "items": ["Yoga Mat", "Resistance Bands Set"],
+    "order_date": "2026-09-23",
+    "expected_date": "2026-09-29",
+    "carrier": "DPD",
+    "tracking_number": "01505000000005",
+    "status": "pending"
+  },
+  {
+    "order_id": "ORDER-006",
+    "items": ["Philips Air Fryer XXL"],
+    "order_date": "2026-09-22",
+    "expected_date": "2026-09-30",
+    "carrier": "DPD",
+    "tracking_number": "01505000000006",
+    "status": "in_transit"
+  },
+  {
+    "order_id": "ORDER-007",
+    "items": ["Nintendo Switch OLED"],
+    "order_date": "2026-09-29",
+    "expected_date": "2026-10-02",
+    "carrier": "DHL",
+    "tracking_number": "00340434161094000007",
+    "status": "delivered"
+  },
+  {
+    "order_id": "ORDER-008",
+    "items": ["Running Shoes Nike Pegasus 41"],
+    "order_date": "2026-09-28",
+    "expected_date": "2026-10-03",
+    "carrier": "DHL",
+    "tracking_number": "00340434161094000008",
+    "status": "in_transit"
+  },
+  {
+    "order_id": "ORDER-009",
+    "items": ["Anker USB-C Charger 65W", "USB-C Cable 2m"],
+    "order_date": "2026-09-28",
+    "expected_date": "2026-10-05",
+    "carrier": "DPD",
+    "tracking_number": "01505000000009",
+    "status": "in_transit"
+  }
+]
