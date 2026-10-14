@@ -58,4 +58,8 @@ expected_date — these come from get_order after confirmation.
 **Reads from:** data/orders.json (expected_date) 
                + data/tracking.json (to determine confidence)
 
-**Reads from:** data/orders.json
+Primary source: expected_date from orders.json — always present
+Secondary source: note field from last tracking event — unreliable
+Reconciliation rule: use carrier note ONLY if it contains 
+an explicit reschedule. Otherwise use orders.json expected_date.
+Returns: expected_date, confidence, reason, source

@@ -7,11 +7,10 @@
   ],
 
   "01505000000002": [
-    {"timestamp": "2026-09-29T18:10:00", "location": "Munich, Seller Warehouse", "status": "label_created", "note": null},
-    {"timestamp": "2026-09-30T14:00:00", "location": "DPD Depot Aschheim (Munich)", "status": "picked_up", "note": null},
-    {"timestamp": "2026-10-01T02:30:00", "location": "DPD Hub Hannover", "status": "in_transit", "note": null},
-    {"timestamp": "2026-10-02T21:15:00", "location": "DPD Depot Berlin-Mariendorf", "status": "arrived_at_facility", "note": null},
-    {"timestamp": "2026-10-03T08:12:00", "location": "Berlin-Friedrichshain, Boxhagener Str.", "status": "out_for_delivery", "note": "Estimated delivery window 13:00–14:00"}
+    {"timestamp": "2026-09-30T18:10:00", "location": "Munich, Seller Warehouse", "status": "label_created", "note": null},
+    {"timestamp": "2026-10-01T14:00:00", "location": "DPD Depot Aschheim (Munich)", "status": "picked_up", "note": null},
+    {"timestamp": "2026-10-02T02:30:00", "location": "DPD Hub Hannover", "status": "in_transit", "note": null},
+    {"timestamp": "2026-10-02T21:15:00", "location": "DPD Depot Berlin-Mariendorf", "status": "arrived_at_facility", "note": "Scheduled for delivery 2026-10-05"}
   ],
 
   "00340434161094000003": [
@@ -52,10 +51,10 @@
   ],
 
   "00340434161094000008": [
-    {"timestamp": "2026-09-28T14:25:00", "location": "Berlin-Tempelhof, Seller Warehouse", "status": "label_created", "note": null},
-    {"timestamp": "2026-09-30T10:00:00", "location": "DHL Paketzentrum Rüdersdorf (Berlin)", "status": "picked_up", "note": null},
+    {"timestamp": "2026-09-29T14:25:00", "location": "Berlin-Tempelhof, Seller Warehouse", "status": "label_created", "note": null},
+    {"timestamp": "2026-10-01T10:00:00", "location": "DHL Paketzentrum Rüdersdorf (Berlin)", "status": "picked_up", "note": null},
     {"timestamp": "2026-10-01T22:30:00", "location": "DHL Paketzentrum Rüdersdorf (Berlin)", "status": "in_transit", "note": null},
-    {"timestamp": "2026-10-02T22:10:00", "location": "DHL Zustellbasis Berlin-Charlottenburg", "status": "arrived_at_facility", "note": "Scheduled for delivery 2026-10-03"}
+    {"timestamp": "2026-10-02T22:10:00", "location": "DHL Zustellbasis Berlin-Charlottenburg", "status": "arrived_at_facility", "note": "Scheduled for delivery 2026-10-05"}
   ],
 
   "01505000000009": [

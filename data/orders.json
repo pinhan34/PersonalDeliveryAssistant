@@ -12,7 +12,7 @@
     "order_id": "ORDER-002",
     "items": ["Bialetti Moka Express 6-Cup", "Lavazza Espresso Beans 1kg"],
     "order_date": "2026-09-29",
-    "expected_date": "2026-10-03",
+    "expected_date": "2026-10-05",
     "carrier": "DPD",
     "tracking_number": "01505000000002",
     "status": "in_transit"
@@ -66,7 +66,7 @@
     "order_id": "ORDER-008",
     "items": ["Running Shoes Nike Pegasus 41"],
     "order_date": "2026-09-28",
-    "expected_date": "2026-10-03",
+    "expected_date": "2026-10-05",
     "carrier": "DHL",
     "tracking_number": "00340434161094000008",
     "status": "in_transit"
