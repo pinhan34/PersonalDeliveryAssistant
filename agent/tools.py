@@ -1,4 +1,4 @@
-import json, pathlib, datetime
+import json, pathlib, datetime, re
 
 DATA_DIR = pathlib.Path(__file__).parent.parent / "data"
 TODAY = datetime.date(2026, 10, 4)   # the fake data is built around this date
@@ -36,6 +36,17 @@ def identify_order(query: str) -> list[dict]:
                 break
     return matches
 
+def get_order(order_id: str) -> dict:
+    """
+    Returns the full order record for an exact order_id (case-insensitive).
+    Returns {"error": ...} if the order_id is not found.
+    """
+    all_orders = _load_json_file(DATA_DIR / "orders.json")
+    for order in all_orders:
+        if order["order_id"] == order_id.strip().upper():
+            return order
+    return {"error": f"Order {order_id} not found."}
+
 def track_package(tracking_number: str) -> dict:
     """
     Returns a dict with {events, status_classification}.
@@ -51,6 +62,56 @@ def track_package(tracking_number: str) -> dict:
           "status_classification": status,
      }
     return track
+
+def get_delivery_estimate(tracking_number: str) -> dict:
+    """
+    Returns {expected_date, confidence, reason, source, is_late}, plus
+    original_expected_date when a carrier note rescheduled the delivery.
+    Returns {"error": ...} if the order or its tracking is not found.
+    """
+    all_orders = _load_json_file(DATA_DIR / "orders.json")
+    order = next((o for o in all_orders if o["tracking_number"] == tracking_number), None)
+    if not order:
+        return {"error": f"No order with tracking number {tracking_number}."}
+
+    events = _load_json_file(DATA_DIR / "tracking.json").get(tracking_number)
+    if not events:
+        return {"error": f"No tracking data for {tracking_number} "
+                         f"(order status: {order['status']})."}
+
+    latest_event = events[-1]
+    status = _classify_status(latest_event)
+
+    # Which date wins: the order's date, unless the carrier note is an explicit reschedule
+    estimate = {"expected_date": order["expected_date"], "source": "order"}
+    note = latest_event["note"] or ""
+    note_date = re.search(r"\d{4}-\d{2}-\d{2}", note)
+    if (
+        note_date
+        and "scheduled" in note.lower()   # also matches "rescheduled"
+        and datetime.date.fromisoformat(note_date.group()) >= TODAY
+        and note_date.group() != order["expected_date"]
+    ):
+        estimate = {
+            "expected_date": note_date.group(),
+            "source": "carrier_note",
+            "original_expected_date": order["expected_date"],
+        }
+
+    is_late = status != "delivered" and TODAY > datetime.date.fromisoformat(estimate["expected_date"])
+
+    if status in ("delivered", "out_for_delivery"):
+        confidence, reason = "high", f"Package is {status}."
+    elif status == "in_transit" and not is_late:
+        confidence, reason = "medium", "Package is moving and on schedule."
+    elif status == "in_transit":
+        confidence, reason = "low", "Package is moving but the expected date has passed."
+    elif status in ("stuck", "at_depot"):
+        confidence, reason = "low", f"Package is {status}: no progress towards delivery."
+    else:  # never_picked_up
+        confidence, reason = "unknown", "Carrier has not received the package yet."
+
+    return {**estimate, "confidence": confidence, "reason": reason, "is_late": is_late}
 
 def _load_json_file(file_path: pathlib.Path) -> list | dict:
     """

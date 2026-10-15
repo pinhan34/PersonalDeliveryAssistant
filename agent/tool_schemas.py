@@ -58,7 +58,8 @@ TOOL_SCHEMAS = [
                 "properties": {
                     "tracking_number": {
                         "type": "string",
-                        "description": "The exact tracking_number from get_order result, format 00340434161094000001"
+                        "description": "The exact tracking_number from the get_order result. "
+                                       "Copy it unchanged — the format differs per carrier."
                     }
                 },
                 "required": ["tracking_number"]

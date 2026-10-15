@@ -93,8 +93,12 @@ The model can recover from a wrong number; a crash ends the chat.
 **Reconciliation — which date wins:**
 - Primary source: expected_date from orders.json — always present
 - Secondary source: note of the LAST tracking event — free text, unreliable
-- Use the carrier note ONLY if it contains an explicit reschedule:
-  an ISO date (YYYY-MM-DD) that differs from orders.json expected_date.
+- Use the carrier note ONLY if it is an explicit reschedule — ALL of:
+  - contains an ISO date (YYYY-MM-DD) — other formats are ignored
+  - contains the word "scheduled" (also matches "rescheduled"),
+    so unrelated dates ("duties must be paid by ...") are ignored
+  - the date is not before TODAY, so stale carrier plans are ignored
+  - the date differs from orders.json expected_date
   Then: expected_date = note date, source = "carrier_note",
   original_expected_date = orders.json date.
 - Otherwise: expected_date = orders.json date, source = "order".
