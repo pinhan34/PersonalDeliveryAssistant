@@ -75,9 +75,45 @@
     "order_id": "ORDER-009",
     "items": ["Anker USB-C Charger 65W", "USB-C Cable 2m"],
     "order_date": "2026-09-28",
-    "expected_date": "2026-10-05",
+    "expected_date": "2026-10-02",
     "carrier": "DPD",
     "tracking_number": "01505000000009",
     "status": "in_transit"
+  },
+  {
+    "order_id": "ORDER-010",
+    "items": ["Echo Dot (5th Gen)"],
+    "order_date": "2026-10-03",
+    "expected_date": "2026-10-04",
+    "carrier": "Amazon Logistics",
+    "tracking_number": "TBA000000000010",
+    "status": "in_transit"
+  },
+  {
+    "order_id": "ORDER-011",
+    "items": ["Barbour Waxed Jacket"],
+    "order_date": "2026-09-24",
+    "expected_date": "2026-10-07",
+    "carrier": "DHL",
+    "tracking_number": "00340434161094000011",
+    "status": "in_transit"
+  },
+  {
+    "order_id": "ORDER-012",
+    "items": ["LEGO Technic Porsche 911"],
+    "order_date": "2026-10-02",
+    "expected_date": "2026-10-07",
+    "carrier": "Hermes",
+    "tracking_number": "H1000000000012",
+    "status": "pending"
+  },
+  {
+    "order_id": "ORDER-013",
+    "items": ["Logitech MX Master 3S Mouse"],
+    "order_date": "2026-09-27",
+    "expected_date": "2026-10-01",
+    "carrier": "DPD",
+    "tracking_number": "01505000000013",
+    "status": "cancelled"
   }
 ]

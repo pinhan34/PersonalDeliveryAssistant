@@ -13,7 +13,9 @@ Fields per order:
 - order_date (str) — ISO date e.g. "2026-09-29"
 - expected_date (str) — ISO date e.g. "2026-10-02"
 - carrier (str) — e.g. "DHL", "DPD", "Hermes"
-- tracking_number (str) — unique, used as key in tracking.json
+- tracking_number (str) — unique, used as key in tracking.json.
+  Cancelled orders may have NO entry in tracking.json (e.g. ORDER-013);
+  track_package then returns an error dict.
 - status (str) — one of: pending | in_transit | delivered | cancelled
 
 ## tracking.json

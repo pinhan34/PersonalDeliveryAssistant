@@ -1,6 +1,7 @@
 import json, pathlib, datetime
 
 DATA_DIR = pathlib.Path(__file__).parent.parent / "data"
+TODAY = datetime.date(2026, 10, 4)   # the fake data is built around this date
 
 
 def identify_order(query: str) -> list[dict]:
@@ -35,6 +36,21 @@ def identify_order(query: str) -> list[dict]:
                 break
     return matches
 
+def track_package(tracking_number: str) -> dict:
+    """
+    Returns a dict with {events, status_classification}.
+    Returns {"error": "..."} if the tracking number is not found."""
+    all_trackings = _load_json_file(DATA_DIR / "tracking.json")
+    order_tracked = all_trackings.get(tracking_number)
+    
+    if not order_tracked:
+        return {"error": f"Tracking number {tracking_number} not found."}
+    status = _classify_status(order_tracked[-1])
+    track = {
+          "events": order_tracked,
+          "status_classification": status,
+     }
+    return track
 
 def _load_json_file(file_path: pathlib.Path) -> list | dict:
     """
@@ -43,3 +59,33 @@ def _load_json_file(file_path: pathlib.Path) -> list | dict:
     """
     with open(file_path, "r", encoding="utf-8") as file:
         return json.load(file)
+
+def _classify_status(latest_event: dict) -> str:
+    """
+    Classifies a package from its latest tracking event (rules in tools.md).
+    Returns one of: "delivered", "out_for_delivery", "at_depot",
+    "never_picked_up", "stuck", "in_transit".
+    """
+    status = latest_event["status"]
+    days = _find_days_since_last_event(latest_event["timestamp"])
+    if status == "delivered":
+        return "delivered"
+    elif status == "out_for_delivery":
+        return "out_for_delivery"
+    elif status == "at_depot" or status == "delivery_attempted":
+        return "at_depot"
+    elif status == "label_created" and days > 3:
+        return "never_picked_up"
+    elif days > 3:
+        return "stuck"
+    else:
+        return "in_transit"
+
+
+def _find_days_since_last_event(time_occurred: str) -> int:
+    """
+    Calculates the number of days between the event and TODAY.
+    Raises if the timestamp is invalid — that is a bug in our data.
+    """
+    event_date = datetime.datetime.fromisoformat(time_occurred).date()
+    return (TODAY - event_date).days
