@@ -51,8 +51,12 @@ TOOL_SCHEMAS = [
         "type": "function",
         "function": {
             "name": "track_package",
-            "description": "Tracks the package by its tracking_number. "
-                           "Use this AFTER get_order has returned a tracking_number.",
+            "description": "Returns where the package is and what happened to it: "
++                           "every scan with location and the carrier's notes "
++                           "(reasons for delays, required actions, deadlines). "
++                           "Call this for ANY question about an order's status or location, "
++                           "together with get_delivery_estimate. "
++                           "Requires tracking_number from get_order.",
             "parameters": {
                 "type": "object",
                 "properties": {
@@ -73,7 +77,6 @@ TOOL_SCHEMAS = [
             "description": "Retrieves the estimated delivery date and the confidence level. "
                            "Call this when the user asks about timing or whether their "
                            "package is late. Requires tracking_number from get_order. "
-                           "Can be called independently from track_package — "
                            "both only require tracking_number from get_order.",
             "parameters": {
                 "type": "object",

@@ -62,7 +62,8 @@
 
 **Tool returns wrong shape:**
 - Loop validates return type before json.dumps()
-- If not a dict: replace with error dict before appending
+- Valid: dict, or list (identify_order returns a list by contract)
+- If neither: replace with error dict before appending
 - {"error": "Tool X returned Y instead of dict", "tool": tool_name}
 
 **OpenAI API call fails:**

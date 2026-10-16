@@ -41,7 +41,7 @@ Full contracts in: `.claude/specs/tools.md`
 ## Critical rules
 - Never modify loop.py without being explicitly asked
 - Never add tools not listed in the contracts above
-- Tools must return dicts — never raw strings, never None
+- Tools must return dicts (identify_order: list of dicts) — never raw strings, never None
 - identify_order must return a list — even for a single match, even for no match
 - Never import OpenAI inside tools.py — tools are pure data functions
 - Never import Streamlit inside agent/ — UI concerns stay in app.py
