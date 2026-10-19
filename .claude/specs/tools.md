@@ -19,12 +19,24 @@ This spec template defines 4 main python tools for tracking the order status and
 **Deliberately excluded:** status, carrier, tracking_number,
 expected_date — these come from get_order after confirmation.
 
-**Matching:** query is split into words; words shorter than 3 letters
-are ignored. An order matches if ANY word (OR) matches:
+**Matching:** query is split into words (punctuation dropped, hyphens
+kept); words shorter than 3 letters and repeated words are ignored.
+A word matches an order if it matches any of:
 - order_id — exact, case-insensitive ("order-004")
 - order_date — exact ISO date ("2026-09-28")
 - weekday of order_date ("monday")
-- item name — substring, case-insensitive ("head" → "Headphones")
+- item name — from the START of any word in the item, case-insensitive,
+  ignoring spaces and hyphens, and may run on into the next words
+  ("head" → "Headphones", "airfryer" → "Air Fryer", "usbc" → "USB-C").
+  Not from the middle of a word: "air" does not match "Chair",
+  "phones" does not match "Headphones".
+
+**Ranking:** each order scores 1 point per matching word. Only the
+orders with the highest score are returned ("monday charger": both
+Monday orders match "monday", only the charger also matches "charger").
+Ties are all returned, in file order ("monday" → 2 orders).
+Assumes one query = one order; for several items the model should call
+identify_order once per item.
 
 **Behaviour:**
 - Returns empty list if no match
@@ -40,6 +52,15 @@ are ignored. An order matches if ANY word (OR) matches:
 **Output:** dict containing:
 - order_id, items (list[str]), order_date, expected_date, 
   carrier, tracking_number, status
+
+**Input normalisation:** the number in the input decides the order, so
+messy or short forms work: "order-004", " ORDER-004 ", "ORDER-4",
+"ORDER004", "order 4", "004", "4" → ORDER-004.
+Input without a number ("", "abc") → error.
+
+**Unknown order_id:** return {"error": "..."} — do not raise. The message
+says what IDs look like and points to identify_order, so the model can
+recover instead of guessing another ID.
 
 **Reads from:** data/orders.json
 
@@ -72,8 +93,14 @@ Computed in a private helper `_classify_status(latest_event)` — called
 with events[-1]; shared with
 get_delivery_estimate so the rules live in one place.
 
+**Input normalisation:** surrounding spaces are stripped and letters
+uppercased (" tba000000000010 " → "TBA000000000010").
+
 **Unknown tracking_number:** return {"error": "..."} — do not raise.
 The model can recover from a wrong number; a crash ends the chat.
+The message points to the tracking_number field of get_order (models
+often pass the order_id by mistake) and mentions that a correct number
+without events may mean the parcel never shipped or was cancelled.
 
 **Reads from:** data/tracking.json
 
@@ -112,6 +139,13 @@ The model can recover from a wrong number; a crash ends the chat.
 **Moving vs late are separate questions:** status_classification says
 whether the carrier is still scanning the parcel; is_late says whether
 the promised date has passed. All four combinations exist in the data.
+
+**Input normalisation:** same as track_package (strip + uppercase) —
+the model passes the same tracking number to both tools.
+
+**Errors:** unknown tracking_number → {"error": "..."} pointing to the
+tracking_number field of get_order. Order exists but has no tracking
+events → {"error": "..."} that includes the order status (e.g. cancelled).
 
 **Reads from:** data/orders.json (expected_date) 
                + data/tracking.json (to determine confidence)

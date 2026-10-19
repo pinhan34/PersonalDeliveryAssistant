@@ -70,6 +70,54 @@ def test_blank_query(query):
 
 
 def test_partial_word():
-    """Should 'head' match 'Headphones'? Should 'air' match 'Air Fryer' AND 'Office Chair'?"""
+    """Decision: a word matches from the START of an item word only.
+    'head' finds 'Headphones'; 'air' finds 'Air Fryer' but NOT 'Office Chair'."""
     assert identify_order("head") == [{"order_id": "ORDER-001", "items": ["Sony WH-1000XM5 Headphones"], "order_date": "2026-09-30"}]
-    assert {entry["order_id"] for entry in identify_order("air")} == {"ORDER-004", "ORDER-006"}
+    assert [entry["order_id"] for entry in identify_order("air")] == ["ORDER-006"]
+
+
+def test_middle_of_word_does_not_match():
+    """'phones' is inside 'Headphones' but not at a word start -> no match."""
+    assert identify_order("phones") == []
+
+
+def test_word_after_hyphen_is_a_word_start():
+    """'Sony WH-1000XM5' — '1000xm5' starts after the hyphen."""
+    assert [entry["order_id"] for entry in identify_order("1000xm5")] == ["ORDER-001"]
+
+
+# --- Ranking and normalisation --------------------------------------------
+
+def test_more_matching_words_win():
+    """'air fryer' must not also return the office chair ('air' in 'chair')."""
+    assert [entry["order_id"] for entry in identify_order("air fryer")] == ["ORDER-006"]
+
+
+def test_weekday_plus_item_narrows_down():
+    """'monday charger' — both Monday orders match 'monday', only one matches 'charger'."""
+    assert [entry["order_id"] for entry in identify_order("monday charger")] == ["ORDER-009"]
+
+
+@pytest.mark.parametrize("query", ["Kindle?", "kindle,", "(kindle)"])
+def test_punctuation_is_ignored(query):
+    assert [entry["order_id"] for entry in identify_order(query)] == ["ORDER-003"]
+
+
+def test_order_id_with_punctuation():
+    assert [entry["order_id"] for entry in identify_order("ORDER-004.")] == ["ORDER-004"]
+
+
+@pytest.mark.parametrize("query", ["airfryer", "air-fryer", "air fryer"])
+def test_spaces_and_hyphens_are_ignored(query):
+    assert [entry["order_id"] for entry in identify_order(query)] == ["ORDER-006"]
+
+
+def test_hyphen_in_item_name():
+    """Item is 'USB-C' — 'usbc' should still find it."""
+    assert [entry["order_id"] for entry in identify_order("usbc")] == ["ORDER-009"]
+
+
+def test_repeated_word_counts_once():
+    """Repeating 'headphones' must not push the Kindle out of a tie."""
+    result = identify_order("headphones headphones kindle")
+    assert {entry["order_id"] for entry in result} == {"ORDER-001", "ORDER-003"}

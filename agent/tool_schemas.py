@@ -52,11 +52,11 @@ TOOL_SCHEMAS = [
         "function": {
             "name": "track_package",
             "description": "Returns where the package is and what happened to it: "
-+                           "every scan with location and the carrier's notes "
-+                           "(reasons for delays, required actions, deadlines). "
-+                           "Call this for ANY question about an order's status or location, "
-+                           "together with get_delivery_estimate. "
-+                           "Requires tracking_number from get_order.",
+                           "every scan with location and the carrier's notes "
+                           "(reasons for delays, required actions, deadlines). "
+                           "Call this for ANY question about an order's status or location, "
+                           "together with get_delivery_estimate. "
+                           "Requires tracking_number from get_order.",
             "parameters": {
                 "type": "object",
                 "properties": {

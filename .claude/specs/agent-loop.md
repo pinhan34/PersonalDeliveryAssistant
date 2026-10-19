@@ -48,7 +48,7 @@
 
 **Display vs full history:**
 - app.py maintains a separate display list (user + final assistant messages only)
-- Tool calls and tool results are never shown to the user
+- Tool calls and tool results are hidden by default, visible in debug mode
 - Full history (including tool internals) is passed to OpenAI only
 
 ## Error handling
